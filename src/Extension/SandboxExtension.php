@@ -121,7 +121,9 @@ final class SandboxExtension extends AbstractExtension
     {
         if (\is_array($obj)) {
             foreach ($obj as $v) {
-                $this->ensureToStringAllowed($v, $lineno, $source);
+                if (\is_object($v) || \is_array($v)) {
+                    $this->ensureToStringAllowed($v, $lineno, $source);
+                }
             }
 
             return $obj;
